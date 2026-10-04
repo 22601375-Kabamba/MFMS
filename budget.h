@@ -1,9 +1,12 @@
 #ifndef BUDGET_H
 #define BUDGET_H
 
-#define MAX_DEPTS 10
+void   budgetMenu(void);
+double calculateRemaining(double budget, double spent);
+int    isWithinBudget(double budget, double spent);
 
-double calculateRemaining(double allocated, double expenditure);
-int isWithinBudget(double allocated, double expenditure);
+int    getDepartmentCount(void);
+double getTotalAllocated(void);
+double getTotalSpent(void);
 
 #endif
