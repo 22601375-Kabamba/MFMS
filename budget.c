@@ -1,7 +1,5 @@
 #include <stdio.h>
-
-double calculateRemaining(double budget, double spent);
-int isWithinBudget(double budget, double spent);
+#include "budget.h"
 
 int main() {
     char departments[20][50];
