@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "suppliers.h" 
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -159,6 +159,5 @@ int main(void)
     return 0;
 }
 
-void supplierMenu(void) { printf("\n[Supplier Management - coming soon]\n"); }
 void assetMenu(void)    { printf("\n[Asset Management - coming soon]\n"); }
 void reportsMenu(void)  { printf("\n[Reports - coming soon]\n"); }
