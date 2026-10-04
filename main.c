@@ -159,7 +159,6 @@ int main(void)
     return 0;
 }
 
-void budgetMenu(void)   { printf("\n[Budget Management - coming soon]\n"); }
 void supplierMenu(void) { printf("\n[Supplier Management - coming soon]\n"); }
 void assetMenu(void)    { printf("\n[Asset Management - coming soon]\n"); }
 void reportsMenu(void)  { printf("\n[Reports - coming soon]\n"); }
