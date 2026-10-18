@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "suppliers.h" 
+#include "assets.h"
+#include "report.h"
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -22,8 +24,6 @@
 void employeeMenu(void);
 void budgetMenu(void);
 void supplierMenu(void);
-void assetMenu(void);
-void reportsMenu(void);
 
 void enableColours(void);
 void displayMenu(void);
@@ -159,5 +159,3 @@ int main(void)
     return 0;
 }
 
-void assetMenu(void)    { printf("\n[Asset Management - coming soon]\n"); }
-void reportsMenu(void)  { printf("\n[Reports - coming soon]\n"); }

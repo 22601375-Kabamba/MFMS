@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 #include "employees.h"
@@ -22,7 +23,7 @@ double transportAllowance[MAX_EMPLOYEES];
 int employeeCount = 0;
  
 void clearInputBuffer(void);
-void pauseScreen(void);
+static void pauseScreen(void);
 int getInteger(char prompt[], int min, int max);
 double getMoney(char prompt[], double min);
 void getText(char prompt[], char text[], int size);
@@ -49,7 +50,7 @@ void clearInputBuffer(void)
     }
 }
  
-void pauseScreen(void)
+static void pauseScreen(void)
 {
     printf("\nPress Enter to continue...");
     getchar();
@@ -107,6 +108,17 @@ double getMoney(char prompt[], double min)
     }
 }
 
+static int hasNonSpace(const char *s)
+{
+    int i;
+    for (i = 0; s[i] != '\0'; i++)
+    {
+        if (!isspace((unsigned char)s[i]))
+            return 1;
+    }
+    return 0;
+}
+
 void getText(char prompt[], char text[], int size)
 {
     while (1)
@@ -122,7 +134,7 @@ void getText(char prompt[], char text[], int size)
         /* remove the newline left by fgets() */
         text[strcspn(text, "\n")] = '\0';
  
-        if (strlen(text) > 0)
+        if (hasNonSpace(text))
         {
             return;
         }

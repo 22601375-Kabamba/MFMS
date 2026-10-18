@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "Assets.h"
+#include "assets.h"
 
 static Asset assets[MAX_ASSETS];
 static int assetCount = 0;
