@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "suppliers.h"
 
 #define MAX 100
 #define STR_LEN 50
@@ -16,12 +17,12 @@ typedef struct {
     char goodsSupplied[STR_LEN];
 } Supplier;
 
-Supplier suppliers[MAX];
-int supplierCount = 0;
-int nextId = 1;
+static Supplier suppliers[MAX];
+static int supplierCount = 0;
+static int nextId = 1;
 
 
-void readLine(const char *prompt, char *dest, int size) {
+static void readLine(const char *prompt, char *dest, int size) {
     printf("%s", prompt);
     if (fgets(dest, size, stdin) == NULL) {
         dest[0] = '\0';
@@ -37,7 +38,7 @@ void readLine(const char *prompt, char *dest, int size) {
     }
 }
 
-int isBlank(const char *s) {
+static int isBlank(const char *s) {
     while (*s) {
         if (!isspace((unsigned char)*s)) return 0;
         s++;
@@ -45,7 +46,7 @@ int isBlank(const char *s) {
     return 1;
 }
 
-int readInt(const char *prompt) {
+static int readInt(const char *prompt) {
     char buf[32];
     int value;
     readLine(prompt, buf, sizeof buf);
@@ -53,7 +54,7 @@ int readInt(const char *prompt) {
     return value;
 }
 
-int findSupplier(int id) {
+static int findSupplier(int id) {
     for (int i = 0; i < supplierCount; i++) {
         if (suppliers[i].id == id) return i;
     }
@@ -61,7 +62,7 @@ int findSupplier(int id) {
 }
 
 
-int isValidPhone(const char *s) {
+static int isValidPhone(const char *s) {
     size_t len = strlen(s);
     if (len < PHONE_MIN || len > PHONE_MAX) return 0;
     for (size_t i = 0; i < len; i++) {
@@ -71,7 +72,7 @@ int isValidPhone(const char *s) {
 }
 
 
-int isValidEmail(const char *s) {
+static int isValidEmail(const char *s) {
     for (int i = 0; s[i] != '\0'; i++) {
         if (isspace((unsigned char)s[i])) return 0;
     }
@@ -87,7 +88,7 @@ int isValidEmail(const char *s) {
 }
 
 
-int containsIgnoreCase(const char *text, const char *term) {
+static int containsIgnoreCase(const char *text, const char *term) {
     char a[STR_LEN], b[STR_LEN];
     int i;
 
@@ -102,20 +103,20 @@ int containsIgnoreCase(const char *text, const char *term) {
     return strstr(a, b) != NULL;
 }
 
-void printHeader(void) {
+static void printHeader(void) {
     printf("\n%-5s %-18s %-25s %-15s %-15s %-15s\n",
            "ID", "Name", "Email", "Phone", "Town", "Goods");
     printf("--------------------------------------------------------------------------------------------\n");
 }
 
-void printSupplier(int i) {
+static void printSupplier(int i) {
     printf("%-5d %-18s %-25s %-15s %-15s %-15s\n",
            suppliers[i].id, suppliers[i].name, suppliers[i].email,
            suppliers[i].phone, suppliers[i].town, suppliers[i].goodsSupplied);
 }
 
 
-void addSupplier(void) {
+static void addSupplier(void) {
     if (supplierCount >= MAX) {
         printf("Supplier list is full.\n");
         return;
@@ -154,7 +155,7 @@ void addSupplier(void) {
     printf("Supplier added with ID %d.\n", s.id);
 }
 
-void viewSuppliers(void) {
+static void viewSuppliers(void) {
     if (supplierCount == 0) {
         printf("No suppliers recorded.\n");
         return;
@@ -165,7 +166,7 @@ void viewSuppliers(void) {
     }
 }
 
-void searchSuppliers(void) {
+static void searchSuppliers(void) {
     if (supplierCount == 0) {
         printf("No suppliers recorded.\n");
         return;
@@ -213,7 +214,7 @@ void searchSuppliers(void) {
     if (!found) printf("No matching suppliers found.\n");
 }
 
-void editSupplier(void) {
+static void editSupplier(void) {
     int id = readInt("Enter supplier ID to edit: ");
     int idx = findSupplier(id);
     if (idx == -1) {
@@ -262,7 +263,7 @@ void editSupplier(void) {
     printf("Supplier updated.\n");
 }
 
-void deleteSupplier(void) {
+static void deleteSupplier(void) {
     int id = readInt("Enter supplier ID to delete: ");
     int idx = findSupplier(id);
     if (idx == -1) {
@@ -301,7 +302,18 @@ void supplierMenu(void) {
     } while (choice != 0);
 }
 
-int main(void) {
-    supplierMenu();
-    return 0;
+
+int getSupplierCount(void) {
+    return supplierCount;
+}
+
+void displaySupplier(void) {
+    int i;
+    if (supplierCount == 0) {
+        printf("No suppliers registered.\n");
+        return;
+    }
+    printHeader();
+    for (i = 0; i < supplierCount; i++)
+        printSupplier(i);
 }
