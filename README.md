@@ -30,7 +30,7 @@
 
     
 
-**Compilation** from the project folder: gcc –std=c99 –Wall –Wextra –pedantic –o mfms main.c utils.c employees.c budget.c suppliers.c assets.c reports.c  
+**Compilation** from the project folder: gcc -std=c99 -Wall -Wextra -pedantic -o mfms main.c utils.c employees.c budget.c suppliers.c assets.c reports.c
 
 HOW TO RUN ./mfms Choose a number from the main menu (1 to 5 for a module, 6 to exit). Each module has its own menu and a “Back” option  **Individual responsibilities**  **Member** 
 
